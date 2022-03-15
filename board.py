@@ -1,5 +1,6 @@
 import random
 import numpy as np
+import math
 
 class Board:
     def __init__(self) -> None:
@@ -115,6 +116,18 @@ class Board:
             for i in range(4):
                 for j in range(4):
                     self.board[j][i]
+
+    def calculateScore(self):
+        score = 0
+        for i in range(4):
+            for j in range(4):
+                squareValue = self.board[i][j]
+                exponant = 1
+                while(squareValue > 2):
+                    squareValue = squareValue/2
+                    exponant += 1
+                score += (exponant-1)* math.pow(2,exponant)
+        return int(score)
 
     def print_state(self):
         print(f' {self.board[0][0]} {self.board[1][0]} {self.board[2][0]} {self.board[3][0]}')
